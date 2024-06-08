@@ -14,14 +14,14 @@ namespace Task1
         public string Name { get; set; }
         public int Limit { get; set; }  
 
-        public List<Student> Students { get; set; }
+        public CustomList<Student> Students { get; set; }
 
         public Group(string name, int limit)
         {
             Id = id++;
             Name = name;
             Limit = limit;
-            Students=new List<Student>();
+            Students=new CustomList<Student>();
         }  
         public void GetDetails()
         {

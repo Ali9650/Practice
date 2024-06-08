@@ -11,20 +11,20 @@ namespace Task1
 
         private static int id = 1;
         public int Id { get; set; }
-        
-        public string Name {  get; set; }   
 
-        public List<Group> Groups { get;}
+        public string Name { get; set; }
+
+        public CustomList<Group> Groups { get; }
 
         public Course(string name)
         {
             Id = id++;
             Name = name;
-            Groups = new List<Group>();
+            Groups = new CustomList<Group>();
         }
-        public void AddGroup(Group group) 
+        public void AddGroup(Group group)
         {
-            Groups.Add(group);  
+            Groups.Add(group);
         }
 
         public void GetAllGroups()
@@ -32,9 +32,19 @@ namespace Task1
             foreach (var group in Groups)
                 group.GetDetails();
         }
-        public List<Student> GetAllStudents()
+        public CustomList<Student> GetAllStudents()
         {
-            return Groups.SelectMany(g => g.Students).ToList();
+            CustomList<Student> students = new CustomList<Student>();   
+            foreach (var group in Groups)
+            {
+                foreach (var student in group.Students)
+                {
+                    students.Add(student);
+
+                }
+            }
+
+            return students;
         }
     }
 }

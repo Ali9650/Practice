@@ -15,7 +15,7 @@ namespace Task1
 
         public string Surname { get; set; }
         public DateTime BirhDate  { get; set; }
-        public List<decimal> Grades { get; set; }
+        public CustomList<decimal> Grades { get; set; }
         
         public Student(string name, string surname, DateTime birhDate)
         {

@@ -237,15 +237,11 @@ namespace Task1
                                     selectedGroup.Students.Remove(studentToRemove);
                                     Console.WriteLine("Telebe qrupdan silindi");
                                 }
-                                else
-                                {
-                                    Console.WriteLine(ErrorMessage.InvalidIdFormat);
-                                }
+                                else                                
+                                    Console.WriteLine(ErrorMessage.InvalidIdFormat);                                
                             }
-                            else
-                            {
-                                Console.WriteLine(ErrorMessage.GroupNotFound);
-                            }
+                            else                            
+                                Console.WriteLine(ErrorMessage.GroupNotFound);                           
                             break;
 
                         case (int)Operations.UpdateStudent:
@@ -279,30 +275,20 @@ namespace Task1
                                     studentToEdit.Name = Console.ReadLine();
                                     Console.Write("Soyad: ");
                                     studentToEdit.Surname = Console.ReadLine();
-
-
-
                                     Console.WriteLine("Telebenin melumatlari yenilendi");
                                 }
-                                else
-                                {
-                                    Console.WriteLine(ErrorMessage.InvalidIdFormat);
-                                }
+                                else                                
+                                    Console.WriteLine(ErrorMessage.InvalidIdFormat);                           
                             }
-                            else
-                            {
-                                Console.WriteLine(ErrorMessage.GroupNotFound);
-                            }
+                            else                           
+                                Console.WriteLine(ErrorMessage.GroupNotFound);           
                             break;
                         default:
                             break;
                     }
                 }
-                else
-                {
-                    goto Menu;
-                }
-
+                else                
+                    goto Menu;           
             }
 
         }

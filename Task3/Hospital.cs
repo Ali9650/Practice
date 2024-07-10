@@ -2,7 +2,7 @@
 
 namespace Task3
 {
-    internal class Hospital
+    public  class Hospital
     {
         private List<Doctor> doctors;
 
@@ -14,68 +14,56 @@ namespace Task3
 
         public void AddDoctor()
         {
-            Console.WriteLine("Enter doctor's name:");
+            Messages.InputMessage("Doctor");
             string name = Console.ReadLine();
             doctors.Add(new Doctor(name));
-            Console.WriteLine("Doctor added successfully!");
+            Messages.SuccesMessage("Doctor");           
         }
 
         public void ViewAllDoctors()
         {
-            Console.WriteLine("List of Doctors:");
             foreach (var doctor in doctors)
             {
                 Console.WriteLine(doctor.Name);
             }
         }
 
-
         public void ScheduleAppointment()
         {
-            Console.WriteLine("Enter patient's name:");
-            string patientName = Console.ReadLine();
+            Messages.InputMessage("Doctor");
+            string doctorName = Console.ReadLine();
+            
+            Doctor doctor = doctors.Find(d => d.Name == doctorName);
 
-            Console.WriteLine("Enter appointment date (yyyy-MM-dd HH:mm):");
-            DateTime date = DateTime.ParseExact(Console.ReadLine(), "yyyy-MM-dd HH:mm", null);
-
-
-            bool isSlotAvailable = true;
-            foreach (var doctor in doctors)
+            if (doctor != null)
             {
-                foreach (var appointment in doctor.Appointments)
-                {
+                Messages.InputMessage("Pasient");
+                string patientName = Console.ReadLine();
 
-                    if ((date - appointment.Date).TotalHours < 1 && (date - appointment.Date).TotalHours > -1)
-                    {
-                        isSlotAvailable = false;
-                        break;
-                    }
-                }
-                if (!isSlotAvailable)
-                    break;
-            }
-
-            if (isSlotAvailable)
-            {
-                Console.WriteLine("Select doctor:");
-                for (int i = 0; i < doctors.Count; i++)
+                
+                Console.WriteLine($"Enter appointment date and time for Dr. {doctor.Name} (yyyy-MM-dd HH:mm):");
+                if (DateTime.TryParse(Console.ReadLine(), out DateTime appointmentDate))
                 {
-                    Console.WriteLine($"{i + 1}. {doctors[i].Name}");
+                    
+                    doctor.ScheduleAppointment(patientName, appointmentDate);
+                    Messages.SuccesMessage("ScheduleAppointment");
                 }
-                int choice = int.Parse(Console.ReadLine());
-                doctors[choice - 1].Appointments.Add(new Appointment(patientName, date));
-                Console.WriteLine("Appointment scheduled successfully!");
+                else
+                {
+                    Messages.InvalidInputMessage("Data");
+                }
             }
             else
             {
-                Console.WriteLine("Selected time slot is not available. Please choose another time.");
+                Messages.NotFoundMessage("Doctor");
             }
         }
 
 
+
         public void ViewAppointmentsOfDoctor()
         {
-            Console.WriteLine("Enter doctor's name:");
+            Messages.InputMessage("Doctor");
             string doctorName = Console.ReadLine();
 
             Doctor doctor = doctors.Find(d => d.Name == doctorName);
@@ -89,7 +77,7 @@ namespace Task3
             }
             else
             {
-                Console.WriteLine("Doctor not found!");
+                Messages.NotFoundMessage("Doctor");
             }
         }
     }

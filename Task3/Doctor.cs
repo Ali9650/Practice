@@ -17,5 +17,13 @@ namespace Task3
             Name = name;
             Appointments = new List<Appointment>();
         }
+
+        public void ScheduleAppointment(string patientName, DateTime date)
+        {
+            Appointment appointment = new Appointment(patientName, date);
+            Appointments.Add(appointment);
+            Messages.InputMessage("Patientname");
+        }
+
     }
 }
